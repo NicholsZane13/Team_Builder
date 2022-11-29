@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const generateTeam = require("./src/page.js");
 
-// classes required
+// classes for making the entended new classes
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
@@ -21,13 +21,13 @@ const questions = async () => {
       },
       {
         type: "input",
-        message: "What is your ID number?",
-        name: "id",
+        message: "What is your email?",
+        name: "email",
       },
       {
         type: "input",
-        message: "What is your email?",
-        name: "email",
+        message: "What is your ID number?",
+        name: "id",
       },
       {
         type: "list",
@@ -93,7 +93,7 @@ const questions = async () => {
       } 
 
 }; 
-//Asking to add more members or create the team
+//Asking to add more members or run the function to create the team
 async function promptQuestions() {
     await questions()
       
