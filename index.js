@@ -2,13 +2,13 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const generateTeam = require("./src/page.js");
 
-// lib modules
+// classes required
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 
-// Array for answers to questions
-const newStaffMemberData = [];
+// answers for the questions
+const newMembers = [];
 
 // Array object questions asked in CLI to user
 const questions = async () => {
@@ -40,7 +40,7 @@ const questions = async () => {
 
     
       if (answers.role === "Manager") {
-        const managerAns = await inquirer
+        const managerResponse = await inquirer
           .prompt([
             {
               type: "input",
@@ -52,12 +52,12 @@ const questions = async () => {
             answers.name,
             answers.id,
             answers.email,
-            managerAns.officeNumber
+            managerResponse.officeNumber
           );
-          newStaffMemberData.push(newManager);
+          newMembers.push(newManager);
           
       } else if (answers.role === "Engineer") {
-        const githubAns = await inquirer
+        const engineerResponse = await inquirer
           .prompt([
             {
               type: "input",
@@ -69,12 +69,12 @@ const questions = async () => {
               answers.name,
               answers.id,
               answers.email,
-              githubAns.github
+              engineerResponse.github
             );
-            newStaffMemberData.push(newEngineer);
+            newMembers.push(newEngineer);
           
       } else if (answers.role === "Intern") {
-        const internAns = await inquirer
+        const internResponse = await inquirer
           .prompt([
             {
               type: "input",
@@ -87,13 +87,13 @@ const questions = async () => {
             answers.name,
             answers.id,
             answers.email,
-            internAns.school
+            internResponse.school
           );
-          newStaffMemberData.push(newIntern);          
+          newMembers.push(newIntern);          
       } 
 
-}; //end of questions function
-
+}; 
+//Asking to add more members or create the team
 async function promptQuestions() {
     await questions()
       
@@ -117,10 +117,10 @@ async function promptQuestions() {
   promptQuestions();
   
   function newTeam () {
-    console.log("new guy", newStaffMemberData)
+    console.log("new guy", newMembers)
     fs.writeFileSync(
       "./output/index.html",
-      generateTeam(newStaffMemberData),
+      generateTeam(newMembers),
       "utf-8"
     );
   }

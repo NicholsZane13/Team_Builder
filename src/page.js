@@ -17,7 +17,7 @@ const createTeam = (team) => {
       </div>
           `;
     };
-  
+  //making the html for if engineer is selected
     const createEngineer = (engineer) => {
       return `
           <div class="card employee-card">
@@ -27,7 +27,7 @@ const createTeam = (team) => {
       </div>
       <div class="card-body">
           <ul class="list-group">
-              <li class="list-group-item">ID: ${engineer.getId()}</li>
+              <li class="list-group-item">ID: ${engineer.grabId()}</li>
               <li class="list-group-item">Email: <a href="mailto:${engineer.grabEmail()}">${engineer.grabEmail()}</a></li>
               <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.grabGithub()}" target="_blank" rel="noopener noreferrer">${engineer.grabGithub()}</a></li>
           </ul>
@@ -35,7 +35,7 @@ const createTeam = (team) => {
   </div>
           `;
     };
-
+// making the html for if intern is selected
     const createIntern = (intern) => {
       return `
           <div class="card employee-card">
@@ -58,18 +58,18 @@ const createTeam = (team) => {
   
     html.push(
       team
-        .filter((employee) => employee.getRole() === "Manager")
+        .filter((employee) => employee.grabRole() === "Manager")
         .map((manager) => createManager(manager))
     );
     html.push(
       team
-        .filter((employee) => employee.getRole() === "Engineer")
+        .filter((employee) => employee.grabRole() === "Engineer")
         .map((engineer) => createEngineer(engineer))
         .join("")
     );
     html.push(
       team
-        .filter((employee) => employee.getRole() === "Intern")
+        .filter((employee) => employee.grabRole() === "Intern")
         .map((intern) => createIntern(intern))
         .join("")
     );
@@ -77,7 +77,7 @@ const createTeam = (team) => {
     return html.join("");
   };
   
-  // export function to generate entire page
+  // Generating html for the team to be displayed
   module.exports = (team) => {
     return `
       <!DOCTYPE html>
@@ -86,7 +86,7 @@ const createTeam = (team) => {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <title>My Team</title>
+      <title>Avengers Assemble</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <link rel="stylesheet" href="style.css">
